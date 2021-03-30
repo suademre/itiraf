@@ -1,8 +1,17 @@
-import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { firebaseReducer } from "react-redux-firebase";
+import authReducer from "../features/auth/authSlice";
+import confessionReducer from "../features/confession/confessionSlice";
 
 export default configureStore({
   reducer: {
-    counter: counterReducer,
+    firebase: firebaseReducer,
+    auth: authReducer,
+    confession: confessionReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+      immutableCheck: false,
+    }),
 });
